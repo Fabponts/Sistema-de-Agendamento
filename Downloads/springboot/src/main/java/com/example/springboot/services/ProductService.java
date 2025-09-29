@@ -1,5 +1,6 @@
 package com.example.springboot.services;
 
+import com.example.springboot.exeception.ItemNotFound;
 import com.example.springboot.model.Products;
 import com.example.springboot.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,9 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Products> findById(Long id) {
-        return productRepository.findById(id);
+    public Products findById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFound("Product with: " + id + " not found"));
     }
 
     public Products save(Products products) {
@@ -28,6 +30,9 @@ public class ProductService {
     }
 
     public void deleteById(Long id){
+        if(! productRepository.existsById(id)){
+            throw new ItemNotFound("Product with: " + id + " not found");
+        }
         productRepository.deleteById(id);
     }
 }
