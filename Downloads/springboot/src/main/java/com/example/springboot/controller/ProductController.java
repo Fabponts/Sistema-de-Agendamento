@@ -1,7 +1,9 @@
 package com.example.springboot.controller;
 
+import com.example.springboot.exeception.ItemNotFound;
 import com.example.springboot.model.Products;
 import com.example.springboot.services.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +24,14 @@ public class ProductController {
         return productService.showProducts();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Products> getProductById(@PathVariable Long id){
-        return productService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> getProductById(@PathVariable Long id){
+        try{
+            Products products = productService.findById(id);
+            return ResponseEntity.ok(products);
+        }
+        catch(ItemNotFound itemNotFound){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(itemNotFound.getMessage());
+        }
     }
 
     @PostMapping
