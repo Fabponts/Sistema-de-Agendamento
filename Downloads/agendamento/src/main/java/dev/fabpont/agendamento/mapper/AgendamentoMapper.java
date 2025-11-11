@@ -15,7 +15,7 @@ public class AgendamentoMapper {
                 .titulo(agendamentoCreateRequest.titulo())
                 .descricao(agendamentoCreateRequest.descricao())
                 .dataInicio(agendamentoCreateRequest.dataInicio())
-                .dataFim(agendamentoCreateRequest.dataFinal())
+                .dataFinal(agendamentoCreateRequest.dataFinal())
                 .status(StatusAgendamento.AGENDADO)
                 .criadoEm(LocalDateTime.now())
                 .build();
@@ -27,7 +27,7 @@ public class AgendamentoMapper {
                 agendamento.getTitulo(),
                 agendamento.getDescricao(),
                 agendamento.getDataInicio(),
-                agendamento.getDataFim(),
+                agendamento.getDataFinal(),
                 agendamento.getStatus(),
                 agendamento.getCriadoEm()
         );
@@ -43,7 +43,7 @@ public class AgendamentoMapper {
             entity.setDataInicio(agendamentoUpdateRequest.dataInicio());
         }
         if(agendamentoUpdateRequest!= null) {
-            entity.setDataFim(agendamentoUpdateRequest.dataFinal());
+            entity.setDataFinal(agendamentoUpdateRequest.dataFinal());
         }
     }
 }

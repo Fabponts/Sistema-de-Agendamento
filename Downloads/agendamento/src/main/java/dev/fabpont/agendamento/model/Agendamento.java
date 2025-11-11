@@ -24,8 +24,8 @@ public class Agendamento {
     private String descricao;
     @Column(name = "data_inicio",nullable = false)
     private LocalDateTime dataInicio;
-    @Column(name = "data_final",nullable = false)
-    private LocalDateTime dataFim;
+    @Column(name = "date_final",nullable = false)
+    private LocalDateTime dataFinal;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
     private StatusAgendamento status;

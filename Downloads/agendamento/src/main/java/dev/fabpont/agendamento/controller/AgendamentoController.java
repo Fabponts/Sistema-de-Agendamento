@@ -20,7 +20,7 @@ public class AgendamentoController {
         return agendamentoService.saveAgendamento(agendamentocreateRequest);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     public AgendamentoResponse updateAgendamento(@PathVariable Long id, @RequestBody AgendamentoUpdateRequest agendamentoupdateRequest){
         return agendamentoService.updateAgendamento(id, agendamentoupdateRequest);
     }
