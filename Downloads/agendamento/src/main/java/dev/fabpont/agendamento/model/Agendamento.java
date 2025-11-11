@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -23,12 +25,12 @@ public class Agendamento {
     @Column(columnDefinition = "TEXT")
     private String descricao;
     @Column(name = "data_inicio",nullable = false)
-    private String dataInicio;
+    private LocalDateTime dataInicio;
     @Column(name = "data_final",nullable = false)
-    private String dataFim;
+    private LocalDateTime dataFim;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
     private StatusAgendamento status;
     @Column(name = "criado_em", nullable = false)
-    private String criadoEm;
+    private LocalDateTime criadoEm;
 }
