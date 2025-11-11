@@ -1,12 +1,10 @@
 package dev.fabpont.agendamento.controller;
 
+import dev.fabpont.agendamento.dto.AgendamentoCreateRequest;
 import dev.fabpont.agendamento.dto.AgendamentoResponse;
-import dev.fabpont.agendamento.model.Agendamento;
+import dev.fabpont.agendamento.dto.AgendamentoUpdateRequest;
 import dev.fabpont.agendamento.service.AgendamentoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/agendamentos")
@@ -18,5 +16,27 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public AgendamentoResponse createAgendamento(@RequestBody Agendamento agendamento){}
+    public AgendamentoResponse createAgendamento(@RequestBody AgendamentoCreateRequest agendamentocreateRequest){
+        return agendamentoService.saveAgendamento(agendamentocreateRequest);
+    }
+
+    @PutMapping("/{id}")
+    public AgendamentoResponse updateAgendamento(@PathVariable Long id, @RequestBody AgendamentoUpdateRequest agendamentoupdateRequest){
+        return agendamentoService.updateAgendamento(id, agendamentoupdateRequest);
+    }
+
+    @PutMapping("/{id}/cancel")
+    public AgendamentoResponse cancelAgendamento(Long id){
+        return agendamentoService.cancelAgendamento(id);
+    }
+
+    @PutMapping("/{id}/concluir")
+    public AgendamentoResponse concluirAgendamento(Long id){
+        return agendamentoService.closeAgendamento(id);
+    }
+
+    @GetMapping("/{id}")
+    public AgendamentoResponse findAgendamentoById(@PathVariable Long id){
+        return agendamentoService.findAgendamentoById(id);
+    }
 }
